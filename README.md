@@ -4,13 +4,20 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Bu projede amaç genel geçer bir Uygulama Mimarisi kurmaktır. MVVM + Feature Base + Folder Structure temel alınarak bir mimari kurulması amaçlanmaktadır. 
 
-A few resources to get you started if this is your first Flutter project:
+Kaynak: https://www.youtube.com/playlist?list=PL1k5oWAuBhgV_XnhMSyu2YLZMZNGuD0Cv
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Keywords
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- MVC (Model View Controller)
+
+- MVVM (Model View ViewModel)
+
+- Folder Structure
+
+- Feature Base
+
+- Atomic Design
+
+- TDD (Test Driven Development)
