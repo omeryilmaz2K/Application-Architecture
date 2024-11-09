@@ -21,3 +21,5 @@ Kaynak: https://www.youtube.com/playlist?list=PL1k5oWAuBhgV_XnhMSyu2YLZMZNGuD0Cv
 - Atomic Design
 
 - TDD (Test Driven Development)
+
+- Reflection
