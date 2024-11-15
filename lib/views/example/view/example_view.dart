@@ -1,5 +1,6 @@
-import 'package:application_architecture/core/base/state/base_state.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/base/state/base_state.dart';
 
 class ExampleView extends StatefulWidget {
   const ExampleView({super.key});

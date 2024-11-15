@@ -1,8 +1,11 @@
-import 'package:application_architecture/core/constants/app/app_constants.dart';
-import 'package:application_architecture/core/init/lang/language_manager.dart';
-import 'package:application_architecture/view/example/view/example_base_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'core/constants/app/app_constants.dart';
+import 'core/init/lang/language_manager.dart';
+import 'core/init/notifiers/app_providers.dart';
+import 'views/app/view/app_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,21 +15,12 @@ Future<void> main() async {
     EasyLocalization(
       path: AppConstant.langAssetPath,
       supportedLocales: LanguageManager.instance.supoortedLocales,
-      child: const MyApp(),
+      child: MultiProvider(
+        providers: [
+          ...AppProvider.instance.singleProviders,
+        ],
+        child: const AppView(),
+      ),
     ),
   );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      home: const ExampleBaseView(),
-    );
-  }
 }
