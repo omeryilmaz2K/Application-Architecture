@@ -5,6 +5,8 @@ import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/enums/app_themes.dart';
+import '../../../core/constants/enums/locale_keys_enum.dart';
+import '../../../core/init/cache/locale_manager.dart';
 import '../../../core/init/notifiers/theme_notifier.dart';
 
 part 'example_view_model.g.dart';
@@ -27,6 +29,8 @@ abstract class _ExampleViewModel with Store {
   @action
   void incrementNumber() {
     number++;
+
+    LocaleManager.instance.setString(LocaleKeysEnum.token, number.toString());
   }
 
   void changeTheme() {

@@ -4,7 +4,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../core/base/state/base_state.dart';
 import '../../../core/base/view/base_view.dart';
+import '../../../core/constants/enums/locale_keys_enum.dart';
 import '../../../core/extensions/string_ext.dart';
+import '../../../core/init/cache/locale_manager.dart';
 import '../../../core/init/lang/language_manager.dart';
 import '../../../core/init/lang/locale_keys.g.dart';
 import '../viewmodel/example_view_model.dart';
@@ -29,6 +31,11 @@ final class _ExampleBaseViewState extends BaseState<ExampleBaseView> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
+              title: Text(
+                LocaleManager.instance.getStringValue(
+                  LocaleKeysEnum.token,
+                ),
+              ),
               actions: [
                 IconButton(
                   onPressed: viewModel.changeTheme,
