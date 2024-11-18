@@ -29,13 +29,13 @@ final class _ExampleBaseViewState extends BaseState<ExampleBaseView> {
         builder: (context) {
           return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                onPressed: viewModel.changeTheme,
-                icon: const Icon(
-                  Icons.motion_photos_on_rounded,
-                ),
-              ),
               actions: [
+                IconButton(
+                  onPressed: viewModel.changeTheme,
+                  icon: const Icon(
+                    Icons.motion_photos_on_rounded,
+                  ),
+                ),
                 IconButton(
                   onPressed: () => context.setLocale(
                     context.locale != LanguageManager.instance.enLocale
