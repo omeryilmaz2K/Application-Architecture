@@ -33,84 +33,102 @@ final class _ExampleBaseViewState extends BaseState<ExampleBaseView> {
 
     return BaseView<ExampleViewModel>(
       viewModel: exampleViewModel,
-      onPageBuilder: (context, viewModel) => Observer(
-        builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                LocaleManager.instance.getStringValue(
-                  LocaleKeysEnum.token,
-                ),
-              ),
-              actions: [
-                IconButton(
-                  onPressed: viewModel.changeTheme,
-                  icon: const Icon(
-                    Icons.motion_photos_on_rounded,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () => context.setLocale(
-                    context.locale != LanguageManager.instance.enLocale
-                        ? LanguageManager.instance.enLocale
-                        : LanguageManager.instance.trLocale,
-                  ),
-                  icon: const Icon(
-                    Icons.language,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => FutureBuilder(
-                      future: viewModel.getExampleModel(),
-                      builder: (context, snap) {
-                        return Dialog(
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            child: Wrap(
-                              children: [
-                                Text('title: ${viewModel.user.title}'),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  icon: const Icon(
-                    Icons.account_circle_outlined,
-                  ),
-                ),
-              ],
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const SizedBox(),
-                  Text(
-                    viewModel.number.toString(),
-                  ),
-                  Text(viewModel.isEven
-                      ? LocaleKeys.even.locale
-                      : LocaleKeys.odd.locale),
-                ],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: viewModel.incrementNumber,
-              child: const Icon(
-                Icons.add_outlined,
-              ),
-            ),
-          );
-        },
+      onPageBuilder: (context, viewModel) => ExampleBaseViewWidget(
+        viewModel: viewModel,
       ),
       onModelReady: (model) {
+        model.init();
+        model.setContext(context);
         exampleViewModel = model;
       },
       onDispose: () {},
+    );
+  }
+}
+
+class ExampleBaseViewWidget extends StatelessWidget {
+  const ExampleBaseViewWidget({
+    super.key,
+    required this.viewModel,
+  });
+
+  final ExampleViewModel viewModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              LocaleManager.instance.getStringValue(
+                LocaleKeysEnum.token,
+              ),
+            ),
+            actions: [
+              IconButton(
+                onPressed: viewModel.changeTheme,
+                icon: const Icon(
+                  Icons.motion_photos_on_rounded,
+                ),
+              ),
+              IconButton(
+                onPressed: () => context.setLocale(
+                  context.locale != LanguageManager.instance.enLocale
+                      ? LanguageManager.instance.enLocale
+                      : LanguageManager.instance.trLocale,
+                ),
+                icon: const Icon(
+                  Icons.language,
+                ),
+              ),
+              IconButton(
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => FutureBuilder(
+                    future: viewModel.getExampleModel(),
+                    builder: (context, snap) {
+                      return Dialog(
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Wrap(
+                            children: [
+                              Text('title: ${viewModel.user.title}'),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.account_circle_outlined,
+                ),
+              ),
+            ],
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(),
+                Text(
+                  viewModel.number.toString(),
+                ),
+                Text(viewModel.isEven
+                    ? LocaleKeys.even.locale
+                    : LocaleKeys.odd.locale),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: viewModel.incrementNumber,
+            child: const Icon(
+              Icons.add_outlined,
+            ),
+          ),
+        );
+      },
     );
   }
 }

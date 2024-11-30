@@ -16,6 +16,38 @@ mixin _$ExampleViewModel on _ExampleViewModel, Store {
           Computed<bool>(() => super.isEven, name: '_ExampleViewModel.isEven'))
       .value;
 
+  late final _$userAtom =
+      Atom(name: '_ExampleViewModel.user', context: context);
+
+  @override
+  ExampleModel get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(ExampleModel value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
+  late final _$isLoadingAtom =
+      Atom(name: '_ExampleViewModel.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$numberAtom =
       Atom(name: '_ExampleViewModel.number', context: context);
 
@@ -30,6 +62,14 @@ mixin _$ExampleViewModel on _ExampleViewModel, Store {
     _$numberAtom.reportWrite(value, super.number, () {
       super.number = value;
     });
+  }
+
+  late final _$getExampleModelAsyncAction =
+      AsyncAction('_ExampleViewModel.getExampleModel', context: context);
+
+  @override
+  Future<void> getExampleModel() {
+    return _$getExampleModelAsyncAction.run(() => super.getExampleModel());
   }
 
   late final _$_ExampleViewModelActionController =
@@ -49,6 +89,8 @@ mixin _$ExampleViewModel on _ExampleViewModel, Store {
   @override
   String toString() {
     return '''
+user: ${user},
+isLoading: ${isLoading},
 number: ${number},
 isEven: ${isEven}
     ''';

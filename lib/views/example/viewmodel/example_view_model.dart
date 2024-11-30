@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/base/viewmodel/base_view_model.dart';
 import '../../../core/constants/enums/app_themes.dart';
 import '../../../core/constants/enums/locale_keys_enum.dart';
 import '../../../core/init/cache/locale_manager.dart';
@@ -15,16 +16,16 @@ part 'example_view_model.g.dart';
 
 final class ExampleViewModel = _ExampleViewModel with _$ExampleViewModel;
 
-abstract class _ExampleViewModel with Store {
+abstract class _ExampleViewModel extends BaseViewModel with Store {
   _ExampleViewModel({required this.exampleService});
 
   final ExampleService exampleService;
 
-  late BuildContext viewContext;
+  @override
+  void init() {}
 
-  void setContext(BuildContext context) {
-    viewContext = context;
-  }
+  @override
+  void setContext(BuildContext context) => viewContext = context;
 
   @observable
   ExampleModel user = ExampleModel();

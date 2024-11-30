@@ -1,0 +1,67 @@
+{
+	"Magic Number": {
+		"scope": "dart",
+		"prefix": "magicNumber",
+		"body": [
+			"static const $1 = $2;",
+		],
+		"description": "Magic number create"
+	},
+	"Singleton Eager": {
+		"scope": "dart",
+		"prefix": "eager",
+		"body": [
+			"class $1 {",
+			"  const $1._init();",
+			"",
+			"  static $1? _instance;",
+			"",
+			"  static $1 get instance {",
+			"    return _instance ??= const $1._init();",
+			"  }",
+			"}"
+		],
+		"description": "Singleton Eager Class Structure",
+	},
+	"Mobx View Model": {
+		"prefix": "xMobXViewModel",
+		"body": [
+			"// ignore_for_file: library_private_types_in_public_api",
+			"\t",
+			"import 'package:mobx/mobx.dart';",
+			"\t",
+			"part 'example_view_model.g.dart';",
+			"\t",
+			"final class ${TM_FILENAME_BASE/((^[a-z])|_([a-z]))/${2:/upcase}${3:/upcase}/g} = _${TM_FILENAME_BASE/((^[a-z])|_([a-z]))/${2:/upcase}${3:/upcase}/g} with _$${TM_FILENAME_BASE/((^[a-z])|_([a-z]))/${2:/upcase}${3:/upcase}/g};",
+			"\t",
+			"abstract class _${TM_FILENAME_BASE/((^[a-z])|_([a-z]))/${2:/upcase}${3:/upcase}/g} with Store {}",
+			"\t",
+		]
+	},
+	"Base View Model": {
+		"scope": "dart",
+		"prefix": "bViewModel",
+		"body": [
+			"@override",
+			"void init() {}",
+			"",
+			"@override",
+			"void setContext(BuildContext context) => viewContext = context;",
+		]
+	},
+	"Base View": {
+		"scope": "dart",
+		"prefix": "bView",
+		"body": [
+			"BaseView<$1>(",
+			"viewModel: $1(),",
+			"onModelReady: (model) {",
+			"  model.init();",
+			"  model.setContext(context);",
+			"},",
+			"onPageBuilder: (BuildContext context, $1 viewModel) => Scaffold(),",
+			"onDispose: () {},",
+			");"
+		]
+	}	
+}
