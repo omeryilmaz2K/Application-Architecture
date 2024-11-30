@@ -9,6 +9,8 @@ import '../../../core/extensions/string_ext.dart';
 import '../../../core/init/cache/locale_manager.dart';
 import '../../../core/init/lang/language_manager.dart';
 import '../../../core/init/lang/locale_keys.g.dart';
+import '../../../core/init/network/network_manager.dart';
+import '../service/example_service.dart';
 import '../viewmodel/example_view_model.dart';
 
 final class ExampleBaseView extends StatefulWidget {
@@ -19,7 +21,11 @@ final class ExampleBaseView extends StatefulWidget {
 }
 
 final class _ExampleBaseViewState extends BaseState<ExampleBaseView> {
-  ExampleViewModel exampleViewModel = ExampleViewModel();
+  ExampleViewModel exampleViewModel = ExampleViewModel(
+    exampleService: ExampleService(
+      networkManager: NetworkManager.instance,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +58,30 @@ final class _ExampleBaseViewState extends BaseState<ExampleBaseView> {
                   icon: const Icon(
                     Icons.language,
                   ),
-                )
+                ),
+                IconButton(
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => FutureBuilder(
+                      future: viewModel.getExampleModel(),
+                      builder: (context, snap) {
+                        return Dialog(
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Wrap(
+                              children: [
+                                Text('title: ${viewModel.user.title}'),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  icon: const Icon(
+                    Icons.account_circle_outlined,
+                  ),
+                ),
               ],
             ),
             body: Center(

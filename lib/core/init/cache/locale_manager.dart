@@ -3,9 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/enums/locale_keys_enum.dart';
 
 class LocaleManager {
-  LocaleManager._();
-
-  static final LocaleManager _instance = LocaleManager._();
+  static final LocaleManager _instance = LocaleManager._init();
 
   static LocaleManager get instance => _instance;
 

@@ -26,6 +26,10 @@ dependencies:
   #? Cache
   shared_preferences: ^2.3.3
 
+  #? Network
+  dio: ^5.7.0
+  json_annotation: ^4.9.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -34,6 +38,7 @@ dev_dependencies:
 
   #? Code Generation
   build_runner: ^2.4.13
+  json_serializable: ^6.9.0
 
 flutter:
 
