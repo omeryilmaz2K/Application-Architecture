@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../../core/base/state/base_state.dart';
 import '../../../core/base/view/base_view.dart';
 import '../../../core/constants/enums/locale_keys_enum.dart';
+import '../../../core/extensions/context_ext.dart';
 import '../../../core/extensions/string_ext.dart';
 import '../../../core/init/cache/locale_manager.dart';
 import '../../../core/init/lang/language_manager.dart';
@@ -111,7 +112,23 @@ class ExampleBaseViewWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const SizedBox(),
+                Container(
+                  height: context.height * 0.12,
+                  padding: context.paddingLow,
+                  color: context.colors.secondary,
+                  child: Column(
+                    children: [
+                      mailField,
+                      Padding(
+                        padding: EdgeInsets.only(top: context.lowValue),
+                        child: Text(
+                          'Email',
+                          style: context.textTheme.bodyLarge,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
                 Text(
                   viewModel.number.toString(),
                 ),
@@ -131,4 +148,17 @@ class ExampleBaseViewWidget extends StatelessWidget {
       },
     );
   }
+}
+
+extension _FormArea on ExampleBaseViewWidget {
+  TextFormField get mailField => TextFormField(
+        validator: (value) => value?.isValidEmail,
+        decoration: const InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      );
 }
